@@ -19,15 +19,35 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you shortly.')
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
+    
+    // Formspree integration
+    const form = e.target
+    const data = new FormData(form)
+    
+    fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Thank you for your message! We will get back to you shortly.')
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        alert('There was a problem submitting your form. Please try again.')
+      }
+    })
+    .catch(error => {
+      alert('There was a problem submitting your form. Please try again.')
+      console.error('Error:', error)
     })
   }
 
@@ -140,7 +160,12 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-navy-900 mb-6">
                 Send Us a Message
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                name="contact"
+                method="POST"
+              >
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name *

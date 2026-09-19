@@ -21,17 +21,37 @@ const Employers = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-    alert('Thank you for your request! We will contact you shortly.')
-    setFormData({
-      companyName: '',
-      contactPerson: '',
-      email: '',
-      phone: '',
-      employeesNeeded: '',
-      jobPosition: '',
-      message: ''
+    
+    // Formspree integration
+    const form = e.target
+    const data = new FormData(form)
+    
+    fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Thank you for your request! We will contact you shortly.')
+        setFormData({
+          companyName: '',
+          contactPerson: '',
+          email: '',
+          phone: '',
+          employeesNeeded: '',
+          jobPosition: '',
+          message: ''
+        })
+      } else {
+        alert('There was a problem submitting your form. Please try again.')
+      }
+    })
+    .catch(error => {
+      alert('There was a problem submitting your form. Please try again.')
+      console.error('Error:', error)
     })
   }
 
@@ -146,7 +166,12 @@ const Employers = () => {
             </div>
 
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                name="employer-request"
+                method="POST"
+              >
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Company Name *
