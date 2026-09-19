@@ -112,6 +112,13 @@ const Contact = () => {
                     >
                       +256 751 282 514
                     </a>
+                    <br />
+                    <a
+                      href="tel:+256774809125"
+                      className="text-gray-600 hover:text-red-500 transition-colors"
+                    >
+                      +256 774 809 125
+                    </a>
                   </div>
                 </div>
 
@@ -143,6 +150,15 @@ const Contact = () => {
                       className="text-gray-600 hover:text-green-500 transition-colors"
                     >
                       Chat with us on WhatsApp
+                    </a>
+                    <br />
+                    <a
+                      href="https://wa.me/256774809125"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-green-500 transition-colors"
+                    >
+                      Alternative WhatsApp
                     </a>
                   </div>
                 </div>

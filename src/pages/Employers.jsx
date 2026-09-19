@@ -305,12 +305,20 @@ const Employers = () => {
           <p className="text-gray-300 max-w-2xl mx-auto mb-8">
             Contact us directly and our team will respond to your inquiry as soon as possible.
           </p>
-          <a
-            href="tel:+256751282514"
-            className="inline-flex items-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors"
-          >
-            Call Us: +256 751 282 514
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="tel:+256751282514"
+              className="inline-flex items-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+            >
+              Call Us: +256 751 282 514
+            </a>
+            <a
+              href="tel:+256774809125"
+              className="inline-flex items-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+            >
+              Call Us: +256 774 809 125
+            </a>
+          </div>
         </div>
       </section>
     </div>
