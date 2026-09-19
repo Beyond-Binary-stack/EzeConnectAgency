@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle, Users, Briefcase, Heart } from 'lucide-react'
 import { jobCategories } from '../data/jobCategories'
 
@@ -29,13 +30,19 @@ const Home = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="inline-flex items-center justify-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-all hover:shadow-lg hover:shadow-red-500/30">
+                <Link
+                  to="/jobs"
+                  className="inline-flex items-center justify-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-all hover:shadow-lg hover:shadow-red-500/30"
+                >
                   Find a Job
                   <ArrowRight className="ml-2" size={20} />
-                </button>
-                <button className="inline-flex items-center justify-center bg-white text-navy-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all">
+                </Link>
+                <Link
+                  to="/employers"
+                  className="inline-flex items-center justify-center bg-white text-navy-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all"
+                >
                   Hire Talent
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -116,10 +123,13 @@ const Home = () => {
               <p className="text-gray-600 leading-relaxed">
                 We support recruitment across multiple industries and job categories, providing professional recruitment services, talent matching, employer support, and career opportunities.
               </p>
-              <button className="inline-flex items-center text-red-500 font-semibold hover:text-red-600 transition-colors">
+              <Link
+                to="/about"
+                className="inline-flex items-center text-red-500 font-semibold hover:text-red-600 transition-colors"
+              >
                 Learn More About Us
                 <ArrowRight className="ml-2" size={20} />
-              </button>
+              </Link>
             </div>
             <div className="relative">
               <div className="rounded-2xl shadow-xl w-full h-[400px] bg-gray-200 flex items-center justify-center">
@@ -158,10 +168,13 @@ const Home = () => {
 
           <div className="text-center">
             <p className="text-gray-600 mb-4">And many other positions available.</p>
-            <button className="inline-flex items-center bg-navy-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-navy-900 transition-colors">
+            <Link
+              to="/jobs"
+              className="inline-flex items-center bg-navy-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-navy-900 transition-colors"
+            >
               View All Jobs
               <ArrowRight className="ml-2" size={20} />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -175,10 +188,13 @@ const Home = () => {
           <p className="text-gray-300 max-w-2xl mx-auto mb-8">
             Tell us about your skills and experience and let us help connect you with suitable employment opportunities.
           </p>
-          <button className="inline-flex items-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-all hover:shadow-lg hover:shadow-red-500/30">
+          <Link
+            to="/jobs"
+            className="inline-flex items-center bg-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-600 transition-all hover:shadow-lg hover:shadow-red-500/30"
+          >
             Find a Job
             <ArrowRight className="ml-2" size={20} />
-          </button>
+          </Link>
         </div>
       </section>
     </div>
