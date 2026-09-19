@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight, CheckCircle, Users, Clock, Award, Building2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const Employers = () => {
   const [formData, setFormData] = useState({
@@ -22,36 +23,40 @@ const Employers = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    // Formspree integration
-    const form = e.target
-    const data = new FormData(form)
-    
-    fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
+    // EmailJS integration
+    const templateParams = {
+      company_name: formData.companyName,
+      contact_person: formData.contactPerson,
+      email: formData.email,
+      phone: formData.phone,
+      employees_needed: formData.employeesNeeded,
+      job_position: formData.jobPosition,
+      message: formData.message,
+      to_email: 'rkayemba@students.vu.ac.ug'
+    }
+
+    emailjs.send(
+      'YOUR_SERVICE_ID',    // Replace with your EmailJS Service ID
+      'YOUR_TEMPLATE_ID',   // Replace with your EmailJS Template ID
+      templateParams,
+      'YOUR_PUBLIC_KEY'     // Replace with your EmailJS Public Key
+    )
+    .then((result) => {
+      console.log('Email sent successfully:', result.text)
+      alert('Thank you for your request! We will contact you shortly.')
+      setFormData({
+        companyName: '',
+        contactPerson: '',
+        email: '',
+        phone: '',
+        employeesNeeded: '',
+        jobPosition: '',
+        message: ''
+      })
     })
-    .then(response => {
-      if (response.ok) {
-        alert('Thank you for your request! We will contact you shortly.')
-        setFormData({
-          companyName: '',
-          contactPerson: '',
-          email: '',
-          phone: '',
-          employeesNeeded: '',
-          jobPosition: '',
-          message: ''
-        })
-      } else {
-        alert('There was a problem submitting your form. Please try again.')
-      }
-    })
-    .catch(error => {
+    .catch((error) => {
+      console.error('Email send error:', error.text)
       alert('There was a problem submitting your form. Please try again.')
-      console.error('Error:', error)
     })
   }
 

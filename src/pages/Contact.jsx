@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Send, MessageCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,34 +21,36 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    // Formspree integration
-    const form = e.target
-    const data = new FormData(form)
-    
-    fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
+    // EmailJS integration
+    const templateParams = {
+      from_name: formData.fullName,
+      from_email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+      to_email: 'rkayemba@students.vu.ac.ug'
+    }
+
+    emailjs.send(
+      'YOUR_SERVICE_ID',    // Replace with your EmailJS Service ID
+      'YOUR_TEMPLATE_ID',   // Replace with your EmailJS Template ID
+      templateParams,
+      'YOUR_PUBLIC_KEY'     // Replace with your EmailJS Public Key
+    )
+    .then((result) => {
+      console.log('Email sent successfully:', result.text)
+      alert('Thank you for your message! We will get back to you shortly.')
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      })
     })
-    .then(response => {
-      if (response.ok) {
-        alert('Thank you for your message! We will get back to you shortly.')
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-      } else {
-        alert('There was a problem submitting your form. Please try again.')
-      }
-    })
-    .catch(error => {
-      alert('There was a problem submitting your form. Please try again.')
-      console.error('Error:', error)
+    .catch((error) => {
+      console.error('Email send error:', error.text)
+      alert('There was a problem sending your message. Please try again.')
     })
   }
 
